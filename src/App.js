@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+
+import PublicLayout from "./layouts/Public";
+import PrivateLayout from "./layouts/Private";
+
+import routes from "./routes";
+
+import "./App.css";
 
 function App() {
+  const { publicPages, privatePages } = routes;
+
+  const renderPrivatePages = function (pages) {
+    return null;
+  };
+
+  const renderPublicPages = function (pages) {
+    return pages.map((page) => {
+      const { id, component: Component, path } = page;
+      return (
+        <Route
+          exact
+          path={path}
+          key={id}
+          render={(route) => (
+            <PublicLayout>
+              <Component route={route} />
+            </PublicLayout>
+          )}
+        />
+      );
+    });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        {renderPublicPages(publicPages)}
+        {renderPrivatePages(privatePages)}
+      </Switch>
     </div>
   );
 }
