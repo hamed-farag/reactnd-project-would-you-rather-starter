@@ -1,6 +1,17 @@
 import consts from "../consts/user";
 
-import { saveUser } from "../../services/userServices";
+import { saveUser, getAllUsers } from "../../services/userServices";
+
+function converObjCollectionToArr(collection) {
+  const arr = [];
+  for (const key in collection) {
+    if (collection.hasOwnProperty(key)) {
+      const el = collection[key];
+      arr.push(el);
+    }
+  }
+  return arr;
+}
 
 function generateIdFromName(name) {
   return name
@@ -25,5 +36,27 @@ export function addNewUser(user) {
           },
         })
     );
+  };
+}
+
+export function getUsers() {
+  return function (dispatch) {
+    return getAllUsers().then((users) =>
+      dispatch({
+        type: consts.GET_ALL_USERS,
+        payload: {
+          users: converObjCollectionToArr(users),
+        },
+      })
+    );
+  };
+}
+
+export function setLoggedInUser(user) {
+  return {
+    type: consts.SET_LOGGEDIN_USER,
+    payload: {
+      user,
+    },
   };
 }
