@@ -23,7 +23,7 @@ class Login extends Component {
     selectedOption: {
       label: "Select User",
     },
-    selectedUser: {},
+    selectedUser: null,
   };
 
   componentDidMount() {
@@ -51,11 +51,15 @@ class Login extends Component {
     const { selectedUser } = this.state;
     const { route } = this.props;
 
-    this.props.setLoggedInUser(selectedUser);
-    route.history.push("/");
+    if (selectedUser) {
+      this.props.setLoggedInUser(selectedUser);
+      route.history.push("/");
+    }
   };
 
   render() {
+    const { selectedUser } = this.state;
+
     return (
       <div className="login-container">
         <Card>
@@ -65,7 +69,12 @@ class Login extends Component {
             value={this.state.selectedOption}
             components={{ Option: (props) => <UserComponent {...props} /> }}
           />
-          <Button onClick={this.handleOnClick}>Log In</Button>
+          <Button
+            disabled={selectedUser ? false : true}
+            onClick={this.handleOnClick}
+          >
+            Log In
+          </Button>
         </Card>
       </div>
     );
