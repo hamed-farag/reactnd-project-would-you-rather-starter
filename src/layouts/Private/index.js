@@ -31,7 +31,7 @@ class PrivateLayout extends Component {
             logOutUser,
           }}
         />
-        {children}
+        {loggedInUser && children}
       </div>
     );
   }
