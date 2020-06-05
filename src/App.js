@@ -6,13 +6,29 @@ import PrivateLayout from "./layouts/Private";
 
 import routes from "./routes";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./App.css";
 
 function App() {
   const { publicPages, privatePages } = routes;
 
   const renderPrivatePages = function (pages) {
-    return null;
+    return pages.map((page) => {
+      const { id, component: Component, path } = page;
+      return (
+        <Route
+          exact
+          path={path}
+          key={id}
+          render={(route) => (
+            <PrivateLayout route={route}>
+              <Component route={route} />
+            </PrivateLayout>
+          )}
+        />
+      );
+    });
   };
 
   const renderPublicPages = function (pages) {
@@ -24,7 +40,7 @@ function App() {
           path={path}
           key={id}
           render={(route) => (
-            <PublicLayout>
+            <PublicLayout route={route}>
               <Component route={route} />
             </PublicLayout>
           )}

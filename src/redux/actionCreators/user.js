@@ -60,3 +60,9 @@ export function setLoggedInUser(user) {
     },
   };
 }
+
+export function removeLoggedInUser() {
+  return {
+    type: consts.REMOVE_LOGGEDIN_USER,
+  };
+}

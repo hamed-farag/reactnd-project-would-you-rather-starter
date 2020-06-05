@@ -1,5 +1,6 @@
 import RegisterPage from "./pages/Register";
 import LoginPage from "./pages/Login";
+import HomePage from "./pages/Home";
 
 const publicPages = [
   {
@@ -14,7 +15,13 @@ const publicPages = [
   },
 ];
 
-const privatePages = [];
+const privatePages = [
+  {
+    id: "duyvtsdc877ddss",
+    component: HomePage,
+    path: "/",
+  },
+];
 
 export default {
   publicPages,

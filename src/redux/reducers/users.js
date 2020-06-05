@@ -16,6 +16,9 @@ export default function (state = initialState, action) {
     case consts.SET_LOGGEDIN_USER:
       return { ...state, loggedInUser: action.payload.user };
 
+    case consts.REMOVE_LOGGEDIN_USER:
+      return { ...state, loggedInUser: null };
+
     default:
       return state;
   }
