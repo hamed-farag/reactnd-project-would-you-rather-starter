@@ -55,9 +55,11 @@ class Login extends Component {
     if (selectedUser) {
       this.props.setLoggedInUser(selectedUser);
 
-      if (route && route.location && route.location.search) {
+      if (route && route.location && route.location.search.trim() !== "") {
         const parsed = queryString.parse(route.location.search);
-        route.history.push(parsed.redirecturl ? parsed.redirecturl : "/");
+        route.history.push(parsed.redirecturl);
+      } else {
+        route.history.push("/");
       }
     }
   };
