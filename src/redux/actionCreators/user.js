@@ -2,16 +2,7 @@ import consts from "../consts/user";
 
 import { saveUser, getAllUsers } from "../../services/userServices";
 
-function converObjCollectionToArr(collection) {
-  const arr = [];
-  for (const key in collection) {
-    if (collection.hasOwnProperty(key)) {
-      const el = collection[key];
-      arr.push(el);
-    }
-  }
-  return arr;
-}
+import converObjCollectionToArr from "../../utils/convertToArr";
 
 function generateIdFromName(name) {
   return name
