@@ -70,7 +70,7 @@ export class Home extends Component {
 
   render() {
     const { isAnswerQuestions } = this.state;
-    const { questions } = this.props;
+    const { questions, route } = this.props;
     const filteredQuestions = this.filterQuestion(questions, isAnswerQuestions);
 
     return (
@@ -81,10 +81,15 @@ export class Home extends Component {
           onChange={this.handleToggleChange}
         />
         <br />
-        {filteredQuestions.map((question) => JSON.stringify(question))}
+        {filteredQuestions.map((question) => (
+          <div onClick={() => route.history.push(`/questions/${question.id}`)}>
+            {JSON.stringify(question)}
+          </div>
+        ))}
       </div>
     );
   }
+  F;
 }
 
 const mapStateToProps = (state) => {
