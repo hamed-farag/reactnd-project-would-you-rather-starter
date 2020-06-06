@@ -39,7 +39,11 @@ class PrivateLayout extends Component {
         />
         <div className="container">
           <div className="row">
-            <div className="col-sm-12">{loggedInUser && children}</div>
+            <div className="col-sm-12">
+              <div className="private-layout-container__body">
+                {loggedInUser && children}
+              </div>
+            </div>
           </div>
         </div>
       </div>
