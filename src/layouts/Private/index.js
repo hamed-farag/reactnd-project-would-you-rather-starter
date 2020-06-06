@@ -5,6 +5,8 @@ import Header from "../../components/Header";
 
 import { removeLoggedInUser } from "../../redux/actionCreators/user";
 
+import "./styles.scss";
+
 class PrivateLayout extends Component {
   componentDidMount() {
     const { loggedInUser, route } = this.props;
@@ -24,14 +26,18 @@ class PrivateLayout extends Component {
   render() {
     const { children, loggedInUser, logOutUser } = this.props;
     return (
-      <div>
+      <div className="private-layout-container">
         <Header
           data={{ user: loggedInUser }}
           actions={{
             logOutUser,
           }}
         />
-        {loggedInUser && children}
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">{loggedInUser && children}</div>
+          </div>
+        </div>
       </div>
     );
   }
