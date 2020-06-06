@@ -1,2 +1,20 @@
+$borderRadius: 5px;
+
 .card-container {
+  border-radius: $borderRadius;
+  border: 2px solid #ccc;
+  &__header {
+    border-top-right-radius: $borderRadius;
+    border-top-left-radius: $borderRadius;
+    background-color: #f8f8f8;
+    border-bottom: 2px solid #ccc;
+    padding: 5px 20px;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  &__body {
+    background-color: #ffffff;
+    border-bottom-left-radius: $borderRadius;
+    border-bottom-right-radius: $borderRadius;
+  }
 }
