@@ -3,6 +3,7 @@ import LoginPage from "./pages/Login";
 import HomePage from "./pages/Home";
 import AddQuestionPage from "./pages/AddQuestion";
 import QuestionDetails from "./pages/QuestionDetails";
+import LeaderBoard from "./pages/LeaderBoard";
 
 const publicPages = [
   {
@@ -32,6 +33,11 @@ const privatePages = [
     id: "65dsf465df46g",
     component: QuestionDetails,
     path: "/questions/:id",
+  },
+  {
+    id: "dsf545s1s2a5f4dg5d",
+    component: LeaderBoard,
+    path: "/leaderboard",
   },
 ];
 
