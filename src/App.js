@@ -4,6 +4,8 @@ import { Switch, Route } from "react-router-dom";
 import PublicLayout from "./layouts/Public";
 import PrivateLayout from "./layouts/Private";
 
+import NotFound from "./pages/404";
+
 import routes from "./routes";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -54,6 +56,7 @@ function App() {
       <Switch>
         {renderPublicPages(publicPages)}
         {renderPrivatePages(privatePages)}
+        <Route render={() => <NotFound />} />
       </Switch>
     </div>
   );
