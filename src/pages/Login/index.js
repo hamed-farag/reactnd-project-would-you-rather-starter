@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Select from "react-select";
+import queryString from "query-string";
 
 import Card from "../../components/Card";
 
@@ -53,7 +54,11 @@ class Login extends Component {
 
     if (selectedUser) {
       this.props.setLoggedInUser(selectedUser);
-      route.history.push("/");
+
+      if (route && route.location && route.location.search) {
+        const parsed = queryString.parse(route.location.search);
+        route.history.push(parsed.redirecturl ? parsed.redirecturl : "/");
+      }
     }
   };
 

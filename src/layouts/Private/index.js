@@ -9,17 +9,22 @@ import "./styles.scss";
 
 class PrivateLayout extends Component {
   componentDidMount() {
-    const { loggedInUser, route } = this.props;
-    if (!loggedInUser) {
-      route.history.push("/login");
-    }
+    this.checkAndRedirect();
   }
 
   // if user click on logout button we need to check again for user
   componentDidUpdate() {
+    this.checkAndRedirect();
+  }
+
+  checkAndRedirect() {
     const { loggedInUser, route } = this.props;
+    console.info(route.location.pathname);
+    const pathname = route.location.pathname;
     if (!loggedInUser) {
-      route.history.push("/login");
+      route.history.push(
+        `/login${pathname.trim() !== "" ? `?redirecturl=${pathname}` : ""}`
+      );
     }
   }
 
