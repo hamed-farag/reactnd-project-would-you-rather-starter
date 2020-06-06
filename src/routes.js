@@ -2,6 +2,7 @@ import RegisterPage from "./pages/Register";
 import LoginPage from "./pages/Login";
 import HomePage from "./pages/Home";
 import AddQuestionPage from "./pages/AddQuestion";
+import QuestionDetails from "./pages/QuestionDetails";
 
 const publicPages = [
   {
@@ -26,6 +27,11 @@ const privatePages = [
     id: "98d7f6g7fd8sikd",
     component: AddQuestionPage,
     path: "/questions/add",
+  },
+  {
+    id: "65dsf465df46g",
+    component: QuestionDetails,
+    path: "/questions/:id",
   },
 ];
 

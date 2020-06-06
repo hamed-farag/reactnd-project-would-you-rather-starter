@@ -19,7 +19,6 @@ class PrivateLayout extends Component {
 
   checkAndRedirect() {
     const { loggedInUser, route } = this.props;
-    console.info(route.location.pathname);
     const pathname = route.location.pathname;
     if (!loggedInUser) {
       route.history.push(
