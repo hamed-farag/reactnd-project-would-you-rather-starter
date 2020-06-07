@@ -1,0 +1,26 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #eff1f1;
+  box-shadow: 0px 0px 10px 0px #9f9f9f;
+  &__link {
+    color: #000;
+    &:hover {
+      text-decoration: none;
+    }
+    &--active {
+    }
+  }
+  &__user {
+    display: inline-block;
+  }
+  &__user-name {
+    margin-right: 10px;
+  }
+  &__user-avatar {
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
+  }
+}

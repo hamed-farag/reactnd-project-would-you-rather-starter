@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import { NavLink } from "react-router-dom";
 
 import "./styles.scss";
 
@@ -12,18 +9,54 @@ export default function (props) {
     actions.logOutUser();
   };
 
+  const renderUser = (user) => {
+    return (
+      <div className="app-header__user">
+        <span className="app-header__user-name">{user.name}</span>
+        <img
+          src={user.avatarURL}
+          alt={user.name}
+          className="app-header__user-avatar"
+        />
+      </div>
+    );
+  };
+
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse>
-        <Nav className="mr-auto">
-          <Link to="/">Home</Link>
-          <Link to="/questions/add">New Question</Link>
-          <Link to="/leaderboard">Leadr Board</Link>
-          <Nav.Link href="#home">{JSON.stringify(data.user)}</Nav.Link>
-          <Link onClick={logOutUser}>Log out</Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <div className="app-header">
+      <div className="app-header__start-section">
+        <NavLink
+          activeClassName="app-header__link--active"
+          to="/"
+          className="app-header__link"
+        >
+          Home
+        </NavLink>
+        <NavLink
+          activeClassName="app-header__link--active"
+          to="/questions/add"
+          className="app-header__link"
+        >
+          New Question
+        </NavLink>
+        <NavLink
+          activeClassName="app-header__link--active"
+          to="/leaderboard"
+          className="app-header__link"
+        >
+          Leadr Board
+        </NavLink>
+      </div>
+      <div className="app-header__end-section">
+        {renderUser(data.user)}
+        <span
+          activeClassName="app-header__link--active"
+          onClick={logOutUser}
+          className="app-header__link"
+        >
+          Log out
+        </span>
+      </div>
+    </div>
   );
 }
