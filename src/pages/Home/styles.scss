@@ -1,2 +1,27 @@
 .home-container {
+  &__poll {
+    padding: 10px;
+    &__option {
+      margin: 10px 0;
+      display: block;
+    }
+    &__details {
+      width: 100%;
+      display: block;
+    }
+  }
+  &__body {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+  &__user {
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 10px;
+    border-right: 1px solid #ccc;
+    img {
+      border-radius: 50%;
+    }
+  }
 }

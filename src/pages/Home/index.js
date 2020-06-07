@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Toggle from "react-toggle";
+import Button from "react-bootstrap/Button";
+
+import Card from "../../components/Card";
 
 import { getQuestions } from "../../redux/actionCreators/question";
+
+import { getAnsweredQuestions, getUnAnsweredQuestions } from "./helpers";
 
 import "react-toggle/style.css";
 import "./styles.scss";
@@ -16,49 +21,13 @@ export class Home extends Component {
     getAllQuestions();
   }
 
-  getAnsweredQuestions(questions, loggedInUser) {
-    return questions.filter((ques) => {
-      if (ques.optionOne && ques.optionOne.votes.length > 0) {
-        const index = ques.optionOne.votes.findIndex(
-          (vote) => vote === loggedInUser.id
-        );
-        return index === -1 ? false : true;
-      }
-      if (ques.optionTwo && ques.optionTwo.votes.length > 0) {
-        const index = ques.optionTwo.votes.findIndex(
-          (vote) => vote === loggedInUser.id
-        );
-        return index === -1 ? false : true;
-      }
-      return false;
-    });
-  }
-
-  getUnAnsweredQuestions(questions, loggedInUser) {
-    return questions.filter((ques) => {
-      if (ques.optionOne && ques.optionOne.votes.length > 0) {
-        const index = ques.optionOne.votes.findIndex(
-          (vote) => vote === loggedInUser.id
-        );
-        return index !== -1 ? false : true;
-      }
-      if (ques.optionTwo && ques.optionTwo.votes.length > 0) {
-        const index = ques.optionTwo.votes.findIndex(
-          (vote) => vote === loggedInUser.id
-        );
-        return index !== -1 ? false : true;
-      }
-      return false;
-    });
-  }
-
   filterQuestion = (questions, showAnsweredQuestions) => {
     const { loggedInUser } = this.props;
 
     if (showAnsweredQuestions) {
-      return this.getAnsweredQuestions(questions, loggedInUser);
+      return getAnsweredQuestions(questions, loggedInUser);
     } else {
-      return this.getUnAnsweredQuestions(questions, loggedInUser);
+      return getUnAnsweredQuestions(questions, loggedInUser);
     }
   };
 
@@ -68,9 +37,37 @@ export class Home extends Component {
     });
   };
 
+  renderQuestionCard = (question) => {
+    const { users, route } = this.props;
+
+    const user = users.find((user) => user.id === question.author);
+
+    return (
+      <Card title={`${user.name} asks`}>
+        <div className="home-container__poll">
+          <div className="home-container__user">
+            <img src={user.avatarURL} alt={user.name}></img>
+          </div>
+          <div className="home-container__body">
+            <h3>Would you rather</h3>
+            <span className="home-container__poll__option">
+              {`... ${question.optionOne.text} ...`}
+            </span>
+            <Button
+              className="home-container__poll__details"
+              onClick={() => route.history.push(`/questions/${question.id}`)}
+            >
+              View Poll
+            </Button>
+          </div>
+        </div>
+      </Card>
+    );
+  };
+
   render() {
     const { isAnswerQuestions } = this.state;
-    const { questions, route } = this.props;
+    const { questions } = this.props;
     const filteredQuestions = this.filterQuestion(questions, isAnswerQuestions);
 
     return (
@@ -80,12 +77,7 @@ export class Home extends Component {
           defaultChecked={this.state.isAnswerQuestions}
           onChange={this.handleToggleChange}
         />
-        <br />
-        {filteredQuestions.map((question) => (
-          <div onClick={() => route.history.push(`/questions/${question.id}`)}>
-            {JSON.stringify(question)}
-          </div>
-        ))}
+        {filteredQuestions.map((question) => this.renderQuestionCard(question))}
       </div>
     );
   }
