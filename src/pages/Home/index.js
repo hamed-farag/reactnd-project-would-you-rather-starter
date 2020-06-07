@@ -43,7 +43,7 @@ export class Home extends Component {
     const user = users.find((user) => user.id === question.author);
 
     return (
-      <Card title={`${user.name} asks`}>
+      <Card title={`${user.name} asks`} key={question.id}>
         <div className="home-container__poll">
           <div className="home-container__user">
             <img src={user.avatarURL} alt={user.name}></img>

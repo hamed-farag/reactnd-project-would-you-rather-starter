@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 
 import "./styles.scss";
@@ -49,11 +49,7 @@ export default function (props) {
       </div>
       <div className="app-header__end-section">
         {renderUser(data.user)}
-        <span
-          activeClassName="app-header__link--active"
-          onClick={logOutUser}
-          className="app-header__link"
-        >
+        <span onClick={logOutUser} className="app-header__link">
           Log out
         </span>
       </div>
