@@ -11,4 +11,12 @@
       display: inline-block;
     }
   }
+  &__result {
+    &__body {
+      vertical-align: middle;
+      display: inline-block;
+    }
+    &__choice {
+    }
+  }
 }

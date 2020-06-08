@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
+import ProgressBar from "react-bootstrap/ProgressBar";
 
 import Card from "../../components/Card";
 
@@ -111,8 +112,48 @@ export class QuestionDetails extends Component {
     );
   }
 
+  getAnswersNumber = (option) => {
+    return option.votes.length;
+  };
+
   renderResults({ question, author }) {
-    return <div className="question-details-container__result"></div>;
+    const { users, loggedinUser } = this.props;
+    return (
+      <div className="question-details-container__result">
+        <div className="question-details-container__question__user">
+          <img src={author.avatarURL} alt={author.name} />
+        </div>
+        <div className="question-details-container__result__body">
+          <h3>Result</h3>
+          <div className="question-details-container__result__choice">
+            <h4>{`Would you rahter ${question.optionOne.text}`}</h4>
+            <ProgressBar
+              striped
+              variant="success"
+              now={
+                (this.getAnswersNumber(question.optionOne) * 100) / users.length
+              }
+            />
+            {`${this.getAnswersNumber(question.optionOne)} of ${
+              users.length
+            } votes`}
+          </div>
+          <div className="question-details-container__result__choice">
+            <h4>{`Would you rahter ${question.optionTwo.text}`}</h4>
+            <ProgressBar
+              striped
+              variant="success"
+              now={
+                (this.getAnswersNumber(question.optionTwo) * 100) / users.length
+              }
+            />
+            {`${this.getAnswersNumber(question.optionTwo)} of ${
+              users.length
+            } votes`}
+          </div>
+        </div>
+      </div>
+    );
   }
 
   render() {
