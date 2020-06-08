@@ -17,8 +17,10 @@ export class Home extends Component {
     isAnswerQuestions: false,
   };
   componentDidMount() {
-    const { getAllQuestions } = this.props;
-    getAllQuestions();
+    const { getAllQuestions, questions } = this.props;
+    if (questions.length === 0) {
+      getAllQuestions();
+    }
   }
 
   filterQuestion = (questions, showAnsweredQuestions) => {
