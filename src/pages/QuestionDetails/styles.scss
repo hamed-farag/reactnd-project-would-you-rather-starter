@@ -1,1 +1,14 @@
-.question-details-container
+.question-details-container {
+  &__question {
+    padding: 10px;
+    &__user {
+      vertical-align: middle;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    &__choices {
+      vertical-align: middle;
+      display: inline-block;
+    }
+  }
+}

@@ -1,6 +1,10 @@
 import consts from "../consts/question";
 
-import { saveQuestion, getAllQuestions } from "../../services/questionServices";
+import {
+  saveQuestion,
+  getAllQuestions,
+  updateQuestionChoice,
+} from "../../services/questionServices";
 
 import converObjCollectionToArr from "../../utils/convertToArr";
 
@@ -37,5 +41,12 @@ export function getQuestions() {
         },
       });
     });
+  };
+}
+
+export function updateQuestionAnswer(questionId, answer, userId) {
+  return function (dispatch) {
+    // instead to update the question in the store, component will fetch again all questions
+    return updateQuestionChoice(questionId, answer, userId);
   };
 }
