@@ -48,21 +48,26 @@ export class QuestionDetails extends Component {
   }
 
   // check if user answer the question or not
-  checkLoggedUserAnswerQuestion({ question }) {
+  getLoggedUserAnswerQuestion({ question }) {
     const { loggedInUser } = this.props;
+    let chosenChoice = null;
 
     const isOptionOneAnswered = question.optionOne.votes.findIndex(
       (vote) => vote === loggedInUser.id
     );
+    if (isOptionOneAnswered !== -1) {
+      return (chosenChoice = "optionOne");
+    }
+
     const isOptionTwoAnswered = question.optionTwo.votes.findIndex(
       (vote) => vote === loggedInUser.id
     );
 
-    if (isOptionOneAnswered !== -1 || isOptionTwoAnswered !== -1) {
-      return true;
+    if (isOptionTwoAnswered !== -1) {
+      return (chosenChoice = "optionTwo");
     }
 
-    return false;
+    return chosenChoice;
   }
 
   handleChoiceClick = (questionId, choice) => {
@@ -116,7 +121,7 @@ export class QuestionDetails extends Component {
     return option.votes.length;
   };
 
-  renderResults({ question, author }) {
+  renderResults({ question, author }, userChoice) {
     const { users, loggedinUser } = this.props;
     return (
       <div className="question-details-container__result">
@@ -126,6 +131,7 @@ export class QuestionDetails extends Component {
         <div className="question-details-container__result__body">
           <h3>Result</h3>
           <div className="question-details-container__result__choice">
+            {userChoice === "optionOne" && "optionONe"}
             <h4>{`Would you rahter ${question.optionOne.text}`}</h4>
             <ProgressBar
               striped
@@ -139,6 +145,7 @@ export class QuestionDetails extends Component {
             } votes`}
           </div>
           <div className="question-details-container__result__choice">
+          {userChoice === "optionTwo" && "optionTWo"}
             <h4>{`Would you rahter ${question.optionTwo.text}`}</h4>
             <ProgressBar
               striped
@@ -160,15 +167,13 @@ export class QuestionDetails extends Component {
     const { questions } = this.props;
     if (questions.length > 0) {
       const questionData = this.getData();
-      const isAnsweredQuestion = this.checkLoggedUserAnswerQuestion(
-        questionData
-      );
+      const userChoice = this.getLoggedUserAnswerQuestion(questionData);
 
       return (
         <div className="question-details-container">
           <Card title={questionData.author.name}>
-            {isAnsweredQuestion
-              ? this.renderResults(questionData)
+            {userChoice !== null
+              ? this.renderResults(questionData, userChoice)
               : this.renderQuestion(questionData)}
           </Card>
         </div>
