@@ -8,6 +8,7 @@ import queryString from "query-string";
 import Card from "../../components/Card";
 
 import appLogo from "../../icons/logo.png";
+import defaultUserImage from "../../icons/default-user.png";
 
 import { getUsers, setLoggedInUser } from "../../redux/actionCreators/user";
 
@@ -16,7 +17,7 @@ import "./styles.scss";
 const UserComponent = ({ innerProps, data, className }) => {
   return (
     <div {...innerProps} className={className}>
-      <img src={data.avatarURL} alt={data.name} />
+      <img src={data.avatarURL || defaultUserImage} alt={data.name} />
       {data.name}
     </div>
   );
