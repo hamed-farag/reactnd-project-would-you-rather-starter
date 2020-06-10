@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 import Select from "react-select";
 import queryString from "query-string";
 
@@ -98,6 +99,10 @@ class Login extends Component {
             </Button>
           </div>
         </Card>
+        <div className="login-container__register">
+          <span>Cannot find your name?</span>{" "}
+          <Link to="/register">Register Now!</Link>
+        </div>
       </div>
     );
   }
