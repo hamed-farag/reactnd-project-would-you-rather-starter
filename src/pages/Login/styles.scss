@@ -1,3 +1,28 @@
-.login-container{
-    
+.login-container {
+  &__body {
+    padding: 10px;
+  }
+  &__logo {
+    margin: 25px auto;
+    display: block;
+  }
+  &__list {
+    margin-bottom: 20px;
+  }
+  &__user {
+      padding: 5px;
+      cursor: pointer;
+      &:hover{
+          background-color: #F8F8F8;
+      }
+    img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  }
+  &__action {
+    width: 100%;
+  }
 }

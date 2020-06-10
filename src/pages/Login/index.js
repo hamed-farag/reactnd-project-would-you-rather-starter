@@ -6,13 +6,15 @@ import queryString from "query-string";
 
 import Card from "../../components/Card";
 
+import appLogo from "../../icons/logo.png";
+
 import { getUsers, setLoggedInUser } from "../../redux/actionCreators/user";
 
 import "./styles.scss";
 
-const UserComponent = ({ innerProps, data }) => {
+const UserComponent = ({ innerProps, data, className }) => {
   return (
-    <div {...innerProps}>
+    <div {...innerProps} className={className}>
       <img src={data.avatarURL} alt={data.name} />
       {data.name}
     </div>
@@ -69,19 +71,32 @@ class Login extends Component {
 
     return (
       <div className="login-container">
-        <Card>
-          <Select
-            onChange={this.handleSelectChange}
-            options={this.props.users}
-            value={this.state.selectedOption}
-            components={{ Option: (props) => <UserComponent {...props} /> }}
-          />
-          <Button
-            disabled={selectedUser ? false : true}
-            onClick={this.handleOnClick}
-          >
-            Log In
-          </Button>
+        <Card title="Login">
+          <div className="login-container__body">
+            <img
+              className="login-container__logo"
+              src={appLogo}
+              alt="Would you rather?"
+            />
+            <Select
+              onChange={this.handleSelectChange}
+              options={this.props.users}
+              value={this.state.selectedOption}
+              components={{
+                Option: (props) => (
+                  <UserComponent {...props} className="login-container__user" />
+                ),
+              }}
+              className="login-container__list"
+            />
+            <Button
+              disabled={selectedUser ? false : true}
+              onClick={this.handleOnClick}
+              className="login-container__action"
+            >
+              Log In
+            </Button>
+          </div>
         </Card>
       </div>
     );
