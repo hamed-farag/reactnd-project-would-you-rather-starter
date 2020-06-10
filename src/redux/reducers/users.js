@@ -3,12 +3,20 @@ import consts from "../consts/user";
 const initialState = {
   loggedInUser: null,
   users: [],
+  isLoading: false,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case consts.SET_LOADING_FLAG:
+      return { ...state, isLoading: action.payload.isLoading };
+
     case consts.ADD_USER:
-      return { ...state, users: [...state.users, action.payload.user] };
+      return {
+        ...state,
+        isLoading: false,
+        users: [...state.users, action.payload.user],
+      };
 
     case consts.GET_ALL_USERS:
       return { ...state, users: [...action.payload.users] };

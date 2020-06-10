@@ -57,3 +57,12 @@ export function removeLoggedInUser() {
     type: consts.REMOVE_LOGGEDIN_USER,
   };
 }
+
+export function setIsLoadingFlag(isLoading) {
+  return {
+    type: consts.SET_LOADING_FLAG,
+    payload: {
+      isLoading,
+    },
+  };
+}
