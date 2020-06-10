@@ -25,31 +25,19 @@ export default function (props) {
   return (
     <div className="app-header">
       <div className="app-header__start-section">
-        <NavLink
-          activeClassName="app-header__link--active"
-          to="/"
-          className="app-header__link"
-        >
+        <NavLink to="/" className="app-header__link">
           Home
         </NavLink>
-        <NavLink
-          activeClassName="app-header__link--active"
-          to="/questions/add"
-          className="app-header__link"
-        >
+        <NavLink to="/questions/add" className="app-header__link">
           New Question
         </NavLink>
-        <NavLink
-          activeClassName="app-header__link--active"
-          to="/leaderboard"
-          className="app-header__link"
-        >
+        <NavLink to="/leaderboard" className="app-header__link">
           Leadr Board
         </NavLink>
       </div>
       <div className="app-header__end-section">
         {renderUser(data.user)}
-        <span onClick={logOutUser} className="app-header__link">
+        <span onClick={logOutUser} className="app-header__link app-header__logout">
           Log out
         </span>
       </div>
