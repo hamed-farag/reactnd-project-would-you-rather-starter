@@ -145,7 +145,7 @@ export class QuestionDetails extends Component {
             } votes`}
           </div>
           <div className="question-details-container__result__choice">
-          {userChoice === "optionTwo" && "optionTWo"}
+            {userChoice === "optionTwo" && "optionTWo"}
             <h4>{`Would you rahter ${question.optionTwo.text}`}</h4>
             <ProgressBar
               striped
@@ -185,7 +185,7 @@ export class QuestionDetails extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    questions: state.questions,
+    questions: state.questions.questions,
     users: state.users.users,
     loggedInUser: state.users.loggedInUser,
   };

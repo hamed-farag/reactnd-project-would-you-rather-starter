@@ -7,7 +7,7 @@ function LeaderBoard(props) {
 
 const mapStateToProps = (state) => ({
   users: state.users.users,
-  questions: state.questions,
+  questions: state.questions.questions,
 });
 
 export default connect(mapStateToProps)(LeaderBoard);

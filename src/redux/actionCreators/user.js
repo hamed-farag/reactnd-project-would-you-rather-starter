@@ -60,7 +60,7 @@ export function removeLoggedInUser() {
 
 export function setIsLoadingFlag(isLoading) {
   return {
-    type: consts.SET_LOADING_FLAG,
+    type: consts.SET_USER_LOADING_FLAG,
     payload: {
       isLoading,
     },

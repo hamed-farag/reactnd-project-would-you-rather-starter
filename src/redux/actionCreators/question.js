@@ -50,3 +50,12 @@ export function updateQuestionAnswer(questionId, answer, userId) {
     return updateQuestionChoice(questionId, answer, userId);
   };
 }
+
+export function setIsLoadingFlag(isLoading) {
+  return {
+    type: consts.SET_QUESTION_LOADING_FLAG,
+    payload: {
+      isLoading,
+    },
+  };
+}

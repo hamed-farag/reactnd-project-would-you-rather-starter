@@ -1,14 +1,28 @@
 import consts from "../consts/question";
 
-const initialState = [];
+const initialState = {
+  questions: [],
+  isLoading: false,
+};
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case consts.SET_QUESTION_LOADING_FLAG:
+      return {
+        ...state,
+        isLoading: action.payload.isLoading,
+      };
+
     case consts.ADD_QUESTION:
-      return [...state, action.payload.question];
+      return {
+        ...state,
+        isLoading: false,
+        questions: [...state.questions, action.payload.question],
+      };
 
     case consts.GET_ALL_QUESTION:
-      return [...action.payload.questions];
+      return { ...state, questions: [...action.payload.questions] };
+
     default:
       return state;
   }

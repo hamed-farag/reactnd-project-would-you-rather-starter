@@ -16,6 +16,7 @@ export class Home extends Component {
   state = {
     isAnswerQuestions: false,
   };
+
   componentDidMount() {
     const { getAllQuestions, questions } = this.props;
     if (questions.length === 0) {
@@ -88,7 +89,7 @@ export class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    questions: state.questions,
+    questions: state.questions.questions,
     loggedInUser: state.users.loggedInUser,
     users: state.users.users,
   };

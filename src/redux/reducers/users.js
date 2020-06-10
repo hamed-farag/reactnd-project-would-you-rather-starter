@@ -8,7 +8,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case consts.SET_LOADING_FLAG:
+    case consts.SET_USER_LOADING_FLAG:
       return { ...state, isLoading: action.payload.isLoading };
 
     case consts.ADD_USER:
