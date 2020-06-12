@@ -13,6 +13,7 @@ $borderRadius: 5px;
     font-weight: bold;
   }
   &__body {
+    padding: 10px;
     background-color: #ffffff;
     border-bottom-left-radius: $borderRadius;
     border-bottom-right-radius: $borderRadius;
