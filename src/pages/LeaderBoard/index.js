@@ -1,11 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Spinner from "react-bootstrap/Spinner";
 
 import Card from "../../components/Card";
+
+import { getUsers, setIsLoadingFlag } from "../../redux/actionCreators/user";
 
 import "./styles.scss";
 
 class LeaderBoard extends Component {
+  componentDidMount() {
+    const { getAllUsers, setIsLoadingFlag } = this.props;
+    setIsLoadingFlag(true);
+    getAllUsers();
+  }
+
   renderScores(user) {
     const answersCount = Object.keys(user.answers).length;
     const questionsCount = user.questions.length;
@@ -51,11 +60,32 @@ class LeaderBoard extends Component {
   }
 
   render() {
-    const { users } = this.props;
-    return (
+    const { users, isLoading } = this.props;
+
+    const sortedUsers = users.sort((userA, userB) => {
+      const answersCountUserA = Object.keys(userA.answers).length;
+      const questionsCountUserA = userA.questions.length;
+
+      const answersCountUserB = Object.keys(userB.answers).length;
+      const questionsCountUserB = userB.questions.length;
+
+      return (
+        answersCountUserB +
+        questionsCountUserB -
+        (answersCountUserA + questionsCountUserA)
+      );
+    });
+
+    return isLoading ? (
+      <div className="leaderboard-container__loading">
+        <div className="leaderboard-container__loading__icon">
+          <Spinner animation="border" role="status" />
+        </div>
+      </div>
+    ) : (
       <div className="leaderboard-container">
-        {users.map((user) => (
-          <div className="leaderboard-container__user">
+        {sortedUsers.map((user) => (
+          <div className="leaderboard-container__user" key={user.id}>
             {this.renderScores(user)}
           </div>
         ))}
@@ -66,7 +96,15 @@ class LeaderBoard extends Component {
 
 const mapStateToProps = (state) => ({
   users: state.users.users,
+  isLoading: state.users.isLoading,
   questions: state.questions.questions,
 });
 
-export default connect(mapStateToProps)(LeaderBoard);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllUsers: () => dispatch(getUsers()),
+    setIsLoadingFlag: (isLoading) => dispatch(setIsLoadingFlag(isLoading)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeaderBoard);

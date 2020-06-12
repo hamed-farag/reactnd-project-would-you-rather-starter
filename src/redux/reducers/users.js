@@ -19,7 +19,7 @@ export default function (state = initialState, action) {
       };
 
     case consts.GET_ALL_USERS:
-      return { ...state, users: [...action.payload.users] };
+      return { ...state, isLoading: false, users: [...action.payload.users] };
 
     case consts.SET_LOGGEDIN_USER:
       return { ...state, loggedInUser: action.payload.user };
