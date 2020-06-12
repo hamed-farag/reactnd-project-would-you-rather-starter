@@ -135,6 +135,8 @@ export function _saveUser(user) {
         id: user.id,
         name: user.name,
         avatarURL: user.avatarURL,
+        questions: user.questions,
+        answers: user.answers,
       };
 
       res(user);
