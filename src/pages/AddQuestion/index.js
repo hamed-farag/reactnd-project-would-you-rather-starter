@@ -75,6 +75,11 @@ export class AddQuestion extends Component {
       </div>
     );
   }
+
+  componentWillUnmount() {
+    const { setIsLoadingFlag } = this.props;
+    setIsLoadingFlag(false);
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -90,6 +95,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(addNewQuestion(optionOneText, optionTwoText, authorId)),
     setQuestionIsLoadingFlag: (isLoading) =>
       dispatch(setIsLoadingFlag(isLoading)),
+    setIsLoadingFlag: (isLoading) => dispatch(setIsLoadingFlag(isLoading)),
   };
 };
 

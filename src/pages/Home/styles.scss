@@ -1,6 +1,17 @@
 .home-container {
+  &__question {
+    margin-bottom: 15px;
+  }
+  &__loading {
+    padding-top: 20px;
+    text-align: center;
+  }
   &__poll {
     padding: 10px;
+    display: flex;
+    &__body {
+      flex: 1;
+    }
     &__option {
       margin: 10px 0;
       display: block;
@@ -10,15 +21,25 @@
       display: block;
     }
   }
-  &__body {
-    display: inline-block;
+  &__title {
+    float: left;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  &__filter {
+    margin-bottom: 15px;
+    text-align: right;
+    span {
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+  }
+  &__toggle {
     vertical-align: middle;
-    margin-left: 10px;
   }
   &__user {
-    display: inline-block;
-    vertical-align: middle;
     padding-right: 10px;
+    margin-right: 10px;
     border-right: 1px solid #ccc;
     img {
       border-radius: 50%;

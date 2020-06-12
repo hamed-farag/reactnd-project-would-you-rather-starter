@@ -21,7 +21,11 @@ export default function (state = initialState, action) {
       };
 
     case consts.GET_ALL_QUESTION:
-      return { ...state, questions: [...action.payload.questions] };
+      return {
+        ...state,
+        isLoading: false,
+        questions: [...action.payload.questions],
+      };
 
     default:
       return state;
