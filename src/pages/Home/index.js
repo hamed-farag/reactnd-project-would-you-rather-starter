@@ -101,7 +101,11 @@ export class Home extends Component {
           />
         </div>
         <hr />
-        {filteredQuestions.map((question) => this.renderQuestionCard(question))}
+        {!isLoading && filteredQuestions.length === 0 ? (
+          <div className="home-container__loading">{"No Questions Found!"}</div>
+        ) : (
+          filteredQuestions.map((question) => this.renderQuestionCard(question))
+        )}
       </div>
     );
   }
