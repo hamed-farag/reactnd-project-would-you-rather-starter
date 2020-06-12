@@ -2,8 +2,6 @@ import consts from "../consts/user";
 
 import { saveUser, getAllUsers } from "../../services/userServices";
 
-import converObjCollectionToArr from "../../utils/convertToArr";
-
 function generateIdFromName(name) {
   return name
     .trim()
@@ -36,7 +34,7 @@ export function getUsers() {
       dispatch({
         type: consts.GET_ALL_USERS,
         payload: {
-          users: converObjCollectionToArr(users),
+          users: Object.values(users),
         },
       })
     );

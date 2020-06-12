@@ -6,8 +6,6 @@ import {
   updateQuestionChoice,
 } from "../../services/questionServices";
 
-import converObjCollectionToArr from "../../utils/convertToArr";
-
 export function addNewQuestion(question) {
   return function (dispatch) {
     return saveQuestion(question).then((question) => {
@@ -24,7 +22,7 @@ export function addNewQuestion(question) {
 export function getQuestions() {
   return function (dispatch) {
     return getAllQuestions().then((questions) => {
-      const questionsArr = converObjCollectionToArr(questions);
+      const questionsArr = Object.values(questions);
       // sort by timestamp
       questionsArr.sort(
         (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
