@@ -13,6 +13,8 @@ import {
   setIsLoadingFlag,
 } from "../../redux/actionCreators/question";
 
+import { mapQuestionToSave } from "./mapper";
+
 import "./styles.scss";
 
 export class AddQuestion extends Component {
@@ -27,11 +29,11 @@ export class AddQuestion extends Component {
     setQuestionIsLoadingFlag(true);
     const values = serializeForm(e.target, { hash: true });
     if (values.optionOne && values.optionTwo) {
-      addNewQuestion(values.optionOne, values.optionTwo, loggedInUser.id).then(
-        (respose) => {
-          route.history.push("/");
-        }
-      );
+      addNewQuestion(
+        mapQuestionToSave(values.optionOne, values.optionTwo, loggedInUser.id)
+      ).then((respose) => {
+        route.history.push("/");
+      });
     }
   };
 
