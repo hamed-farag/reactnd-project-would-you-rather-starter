@@ -130,7 +130,10 @@ export class QuestionDetails extends Component {
   };
 
   renderResults({ question, author }, userChoice) {
-    const { users } = this.props;
+    const countOptionOneAnswers = this.getAnswersNumber(question.optionOne);
+    const countOptionTwoAnswers = this.getAnswersNumber(question.optionTwo);
+    const totalAnswerNumber = countOptionOneAnswers + countOptionTwoAnswers;
+
     return (
       <div className="question-details-container__result">
         <div className="question-details-container__question__user">
@@ -149,14 +152,9 @@ export class QuestionDetails extends Component {
               <ProgressBar
                 striped
                 variant="success"
-                now={
-                  (this.getAnswersNumber(question.optionOne) * 100) /
-                  users.length
-                }
+                now={(countOptionOneAnswers * 100) / totalAnswerNumber}
               />
-              {`${this.getAnswersNumber(question.optionOne)} of ${
-                users.length
-              } votes`}
+              {`${countOptionOneAnswers} of ${totalAnswerNumber} votes`}
             </Card>
           </div>
           <div
@@ -170,14 +168,9 @@ export class QuestionDetails extends Component {
               <ProgressBar
                 striped
                 variant="success"
-                now={
-                  (this.getAnswersNumber(question.optionTwo) * 100) /
-                  users.length
-                }
+                now={(countOptionTwoAnswers * 100) / totalAnswerNumber}
               />
-              {`${this.getAnswersNumber(question.optionTwo)} of ${
-                users.length
-              } votes`}
+              {`${countOptionTwoAnswers} of ${totalAnswerNumber} votes`}
             </Card>
           </div>
         </div>
