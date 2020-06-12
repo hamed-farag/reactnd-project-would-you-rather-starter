@@ -5,6 +5,8 @@ import AddQuestionPage from "./pages/AddQuestion";
 import QuestionDetails from "./pages/QuestionDetails";
 import LeaderBoard from "./pages/LeaderBoard";
 
+import NotFound from "./pages/404";
+
 const publicPages = [
   {
     id: "a9sd8fusndf",
@@ -38,6 +40,11 @@ const privatePages = [
     id: "dsf545s1s2a5f4dg5d",
     component: LeaderBoard,
     path: "/leaderboard",
+  },
+  {
+    id: "s6e5f4w94f16w5fe2",
+    component: NotFound,
+    path: "*",
   },
 ];
 
