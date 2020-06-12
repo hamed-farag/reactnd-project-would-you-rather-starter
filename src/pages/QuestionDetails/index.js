@@ -130,7 +130,7 @@ export class QuestionDetails extends Component {
   };
 
   renderResults({ question, author }, userChoice) {
-    const { users, loggedinUser } = this.props;
+    const { users } = this.props;
     return (
       <div className="question-details-container__result">
         <div className="question-details-container__question__user">

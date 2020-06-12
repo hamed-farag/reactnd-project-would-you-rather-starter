@@ -32,7 +32,7 @@ export default function (props) {
           New Question
         </NavLink>
         <NavLink to="/leaderboard" className="app-header__link">
-          Leadr Board
+          Leader Board
         </NavLink>
       </div>
       <div className="app-header__end-section">
