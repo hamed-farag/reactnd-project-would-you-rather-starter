@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        questions: [...state.questions, action.payload.question],
+        questions: [action.payload.question, ...state.questions],
       };
 
     case consts.GET_ALL_QUESTION:
