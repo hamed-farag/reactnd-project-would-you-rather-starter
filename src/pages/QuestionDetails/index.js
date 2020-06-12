@@ -179,24 +179,29 @@ export class QuestionDetails extends Component {
   }
 
   render() {
-    const { questions, isLoading } = this.props;
+    const { questions, isLoading, route } = this.props;
     if (questions.length > 0) {
       const questionData = this.getData();
-      const userChoice = this.getLoggedUserAnswerQuestion(questionData);
 
-      return isLoading ? (
-        <div className="question-details-container__loading">
-          <Spinner animation="border" role="status" />
-        </div>
-      ) : (
-        <div className="question-details-container">
-          <Card title={questionData.author.name}>
-            {userChoice !== null
-              ? this.renderResults(questionData, userChoice)
-              : this.renderQuestion(questionData)}
-          </Card>
-        </div>
-      );
+      if (questionData.question && questionData.author) {
+        const userChoice = this.getLoggedUserAnswerQuestion(questionData);
+
+        return isLoading ? (
+          <div className="question-details-container__loading">
+            <Spinner animation="border" role="status" />
+          </div>
+        ) : (
+          <div className="question-details-container">
+            <Card title={questionData.author.name}>
+              {userChoice !== null
+                ? this.renderResults(questionData, userChoice)
+                : this.renderQuestion(questionData)}
+            </Card>
+          </div>
+        );
+      }
+    } else {
+      route.history.push("/404");
     }
     return null;
   }
