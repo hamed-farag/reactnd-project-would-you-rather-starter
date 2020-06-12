@@ -1,2 +1,48 @@
 .leaderboard-container {
+  &__user {
+    margin-bottom: 10px;
+  }
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__image {
+      img {
+        width: 128px;
+        height: 128px;
+        border-radius: 50%;
+      }
+    }
+    &__result {
+      flex: 1 1;
+      padding: 10px;
+      border-left: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      margin: 0 10px;
+      h2{
+          margin: 0;
+          margin-bottom: 25px;
+      }
+    }
+    &__statistics {
+    }
+    &__counts {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__score {
+    }
+    &__total {
+      background-color: #2db29a;
+      color: #fff;
+      width: 50px;
+      height: 50px;
+      font-size: 1.75rem;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 50%;
+      line-height: 1.8;
+      margin: 0 auto;
+    }
+  }
 }
