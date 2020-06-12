@@ -1,22 +1,38 @@
 .question-details-container {
+  &__loading {
+    padding-top: 20px;
+    text-align: center;
+  }
   &__question {
-    padding: 10px;
+    display: flex;
     &__user {
-      vertical-align: middle;
-      display: inline-block;
+      padding-right: 10px;
       margin-right: 10px;
+      border-right: 1px solid #ccc;
+      img {
+        border-radius: 50%;
+        height: 128px;
+        width: 128px;
+      }
     }
     &__choices {
-      vertical-align: middle;
-      display: inline-block;
+      flex: 1;
     }
   }
   &__result {
+    display: flex;
     &__body {
-      vertical-align: middle;
-      display: inline-block;
+      flex: 1;
     }
     &__choice {
+      margin-bottom: 10px;
+      &:last-child {
+        margin: 0;
+      }
     }
+  }
+  .chosen {
+    border-radius: 5px;
+    border: 3px solid green;
   }
 }

@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import Spinner from "react-bootstrap/Spinner";
 
 import Card from "../../components/Card";
 
 import {
   getQuestions,
   updateQuestionAnswer,
+  setIsLoadingFlag,
 } from "../../redux/actionCreators/question";
 
 import "./styles.scss";
@@ -71,8 +73,14 @@ export class QuestionDetails extends Component {
   }
 
   handleChoiceClick = (questionId, choice) => {
-    const { getAllQuestions, updateQuestionAnswer, loggedInUser } = this.props;
+    const {
+      getAllQuestions,
+      updateQuestionAnswer,
+      loggedInUser,
+      setIsLoadingFlag,
+    } = this.props;
 
+    setIsLoadingFlag(true);
     updateQuestionAnswer(questionId, choice, loggedInUser.id).then(
       (response) => {
         getAllQuestions();
@@ -130,33 +138,47 @@ export class QuestionDetails extends Component {
         </div>
         <div className="question-details-container__result__body">
           <h3>Result</h3>
-          <div className="question-details-container__result__choice">
-            {userChoice === "optionOne" && "optionONe"}
-            <h4>{`Would you rahter ${question.optionOne.text}`}</h4>
-            <ProgressBar
-              striped
-              variant="success"
-              now={
-                (this.getAnswersNumber(question.optionOne) * 100) / users.length
-              }
-            />
-            {`${this.getAnswersNumber(question.optionOne)} of ${
-              users.length
-            } votes`}
+          <div
+            className={`question-details-container__result__choice ${
+              userChoice === "optionOne" && "chosen"
+            }`}
+          >
+            <Card>
+              {userChoice === "optionOne" && "optionONe"}
+              <h4>{`Would you rahter ${question.optionOne.text}`}</h4>
+              <ProgressBar
+                striped
+                variant="success"
+                now={
+                  (this.getAnswersNumber(question.optionOne) * 100) /
+                  users.length
+                }
+              />
+              {`${this.getAnswersNumber(question.optionOne)} of ${
+                users.length
+              } votes`}
+            </Card>
           </div>
-          <div className="question-details-container__result__choice">
-            {userChoice === "optionTwo" && "optionTWo"}
-            <h4>{`Would you rahter ${question.optionTwo.text}`}</h4>
-            <ProgressBar
-              striped
-              variant="success"
-              now={
-                (this.getAnswersNumber(question.optionTwo) * 100) / users.length
-              }
-            />
-            {`${this.getAnswersNumber(question.optionTwo)} of ${
-              users.length
-            } votes`}
+          <div
+            className={`question-details-container__result__choice ${
+              userChoice === "optionTwo" && "chosen"
+            }`}
+          >
+            <Card>
+              {userChoice === "optionTwo" && "optionTWo"}
+              <h4>{`Would you rahter ${question.optionTwo.text}`}</h4>
+              <ProgressBar
+                striped
+                variant="success"
+                now={
+                  (this.getAnswersNumber(question.optionTwo) * 100) /
+                  users.length
+                }
+              />
+              {`${this.getAnswersNumber(question.optionTwo)} of ${
+                users.length
+              } votes`}
+            </Card>
           </div>
         </div>
       </div>
@@ -164,12 +186,16 @@ export class QuestionDetails extends Component {
   }
 
   render() {
-    const { questions } = this.props;
+    const { questions, isLoading } = this.props;
     if (questions.length > 0) {
       const questionData = this.getData();
       const userChoice = this.getLoggedUserAnswerQuestion(questionData);
 
-      return (
+      return isLoading ? (
+        <div className="question-details-container__loading">
+          <Spinner animation="border" role="status" />
+        </div>
+      ) : (
         <div className="question-details-container">
           <Card title={questionData.author.name}>
             {userChoice !== null
@@ -186,6 +212,7 @@ export class QuestionDetails extends Component {
 const mapStateToProps = (state) => {
   return {
     questions: state.questions.questions,
+    isLoading: state.questions.isLoading,
     users: state.users.users,
     loggedInUser: state.users.loggedInUser,
   };
@@ -196,6 +223,7 @@ const mapDispatchToProps = (dispatch) => {
     getAllQuestions: () => dispatch(getQuestions()),
     updateQuestionAnswer: (questionId, answer, userId) =>
       dispatch(updateQuestionAnswer(questionId, answer, userId)),
+    setIsLoadingFlag: (isLoading) => dispatch(setIsLoadingFlag(isLoading)),
   };
 };
 
