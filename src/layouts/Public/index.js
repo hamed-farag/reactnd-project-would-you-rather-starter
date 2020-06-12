@@ -1,19 +1,21 @@
-import React, { Component } from "react";
+import React from "react";
+
+import Header from "../../components/Header";
 
 import "./styles.scss";
-export default class PublicLayout extends Component {
-  render() {
-    const { children } = this.props;
-    return (
-      <div className="public-layout-container">
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12">
-              <div className="public-layout-container__body">{children}</div>
-            </div>
+
+export default function PublicLayout(props) {
+  const { children } = props;
+  return (
+    <div className="public-layout-container">
+      <Header data={{ user: null }} />
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
+            <div className="public-layout-container__body">{children}</div>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }

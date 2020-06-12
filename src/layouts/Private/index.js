@@ -30,14 +30,14 @@ class PrivateLayout extends Component {
   render() {
     const { children, loggedInUser, logOutUser } = this.props;
     return (
-      loggedInUser && (
-        <div className="private-layout-container">
-          <Header
-            data={{ user: loggedInUser }}
-            actions={{
-              logOutUser,
-            }}
-          />
+      <div className="private-layout-container">
+        <Header
+          data={{ user: loggedInUser }}
+          actions={{
+            logOutUser,
+          }}
+        />
+        {loggedInUser && (
           <div className="container">
             <div className="row">
               <div className="col-sm-12">
@@ -45,8 +45,8 @@ class PrivateLayout extends Component {
               </div>
             </div>
           </div>
-        </div>
-      )
+        )}
+      </div>
     );
   }
 }
